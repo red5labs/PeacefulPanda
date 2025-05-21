@@ -2,7 +2,6 @@ body {
   background-color: #1976D2;
   font-family: Arial, sans-serif;
   color: white;
-  text-align: center;
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,12 +9,13 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   width: 100%;
-  box-sizing: border-box;
 }
 
 html {
   overflow-x: hidden;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .page-wrapper {
@@ -25,6 +25,9 @@ html {
   padding: 20px;
   flex: 1;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 body::before {
@@ -250,22 +253,22 @@ button:hover {
   color: #FFD54F;
 }
 
-/* Footer styles */
+/* Footer styles - completely redone */
 footer {
   background-color: rgba(0, 0, 0, 0.4);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
-  padding: 20px 0;
+  margin: 0;
+  padding: 0;
   backdrop-filter: blur(5px);
-  box-sizing: border-box;
-  z-index: 10; /* Ensure footer is visible */
-  text-align: center;
+  margin-top: auto;
 }
 
 .footer-content {
+  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 20px;
+  text-align: center;
 }
 
 footer p {
@@ -279,21 +282,10 @@ footer p:last-child {
   margin-top: 10px;
 }
 
-/* Fix for Android Chrome */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  #monster-bar {
-    width: 100%;
-    left: 0;
-    right: 0;
-  }
-  
+/* Remove any browser-specific footer overrides */
+@supports (-webkit-min-device-pixel-ratio:0) or (min--moz-device-pixel-ratio:0) {
   footer {
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    transform: none;
+    width: 100%;
   }
 }
 
