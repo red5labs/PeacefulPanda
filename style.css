@@ -4,12 +4,10 @@ body {
   color: white;
   text-align: center;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  align-items: center;
-  position: relative;
   overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
@@ -17,6 +15,15 @@ body {
 
 html {
   overflow-x: hidden;
+  width: 100%;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  flex: 1;
   width: 100%;
 }
 
@@ -111,6 +118,19 @@ h1 {
   background-color: green;
   border-radius: 0 0 20px 20px;
   transition: height 0.15s ease-out, background-color 0.2s ease;
+}
+
+/* Fix for Android Chrome and other browsers */
+@supports (-webkit-min-device-pixel-ratio:0) or (min--moz-device-pixel-ratio:0) {
+  #monster-bar-container {
+    width: 195px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  
+  #monster-bar {
+    width: 100% !important;
+  }
 }
 
 /* Panda image is above the bar */
@@ -232,29 +252,24 @@ button:hover {
 
 /* Footer styles */
 footer {
-  margin-top: auto;
-  padding: 20px 0;
   background-color: rgba(0, 0, 0, 0.4);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 100%;
+  padding: 20px 0;
   backdrop-filter: blur(5px);
   box-sizing: border-box;
   z-index: 10; /* Ensure footer is visible */
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 footer p {
   margin: 5px 0;
-  width: 100%;
-  max-width: 800px; /* Match the max width of other content */
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -262,6 +277,24 @@ footer p {
 footer p:last-child {
   font-style: italic;
   margin-top: 10px;
+}
+
+/* Fix for Android Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  #monster-bar {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  
+  footer {
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    transform: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
