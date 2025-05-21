@@ -10,6 +10,14 @@ body {
   min-height: 100vh;
   align-items: center;
   position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body::before {
@@ -33,6 +41,10 @@ body::before {
   html {
     height: 100%;
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   
   body {
@@ -42,8 +54,15 @@ body::before {
     background-position: top center;
     background-attachment: scroll;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
   
   body::before {
@@ -127,6 +146,9 @@ h1 {
   align-items: center;
   margin: 20px 0;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .control {
@@ -203,6 +225,9 @@ button:hover {
   flex-wrap: wrap;
   gap: 20px;
   margin: 20px 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .card {
@@ -234,6 +259,7 @@ footer {
   padding-right: 20px;
   backdrop-filter: blur(5px);
   position: relative;
+  box-sizing: content-box;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -323,5 +349,24 @@ footer p {
     footer {
       width: calc(100% + 30px); /* Adjusted for smaller padding on mobile */
     }
+  }
+}
+
+.main-container {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .main-container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
   }
 }
