@@ -1,5 +1,6 @@
 const bar = document.getElementById('monster-bar');
 const sensitivityInput = document.getElementById('sensitivity');
+const pandaImage = document.querySelector('.monster-img');
 
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(stream => {
@@ -21,13 +22,27 @@ navigator.mediaDevices.getUserMedia({ audio: true })
       let adjustedVolume = Math.min(100, volume * sensitivity);
 
       bar.style.height = `${adjustedVolume}%`;
+      
+      // Update bar color based on noise level
       bar.style.backgroundColor =
         adjustedVolume < 40 ? 'green' :
         adjustedVolume < 70 ? 'yellow' : 'red';
+      
+      // Update panda image based on noise level
+      if (adjustedVolume < 40) {
+        pandaImage.src = 'images/happy.png';
+      } else if (adjustedVolume < 70) {
+        pandaImage.src = 'images/sad.png';
+      } else {
+        pandaImage.src = 'images/scared.png';
+      }
 
       requestAnimationFrame(update);
     }
 
+    // Set initial image
+    pandaImage.src = 'images/happy.png';
+    
     update();
   })
   .catch(err => alert("Microphone access is required."));
