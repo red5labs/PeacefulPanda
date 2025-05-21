@@ -2,6 +2,75 @@ const bar = document.getElementById('monster-bar');
 const sensitivityInput = document.getElementById('sensitivity');
 const pandaImage = document.querySelector('.monster-img');
 
+// Timer elements
+const timerInput = document.getElementById('timer-input');
+const timerDisplay = document.getElementById('timer-display');
+const timerToggle = document.getElementById('timer-toggle');
+const timerReset = document.getElementById('timer-reset');
+
+// Timer variables
+let timerInterval = null;
+let timeRemaining = 0;
+let timerRunning = false;
+
+// Initialize timer display
+updateTimerFromInput();
+
+// Timer event listeners
+timerInput.addEventListener('change', updateTimerFromInput);
+timerToggle.addEventListener('click', toggleTimer);
+timerReset.addEventListener('click', resetTimer);
+
+// Timer functions
+function updateTimerFromInput() {
+  const minutes = parseInt(timerInput.value) || 10;
+  timeRemaining = minutes * 60;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeRemaining / 60);
+  const seconds = timeRemaining % 60;
+  timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    // Pause timer
+    clearInterval(timerInterval);
+    timerToggle.textContent = 'Start';
+  } else {
+    // Start timer
+    if (timeRemaining <= 0) {
+      updateTimerFromInput();
+    }
+    timerInterval = setInterval(decrementTimer, 1000);
+    timerToggle.textContent = 'Pause';
+  }
+  timerRunning = !timerRunning;
+}
+
+function decrementTimer() {
+  if (timeRemaining > 0) {
+    timeRemaining--;
+    updateTimerDisplay();
+  } else {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerToggle.textContent = 'Start';
+    // Alert when timer is done
+    alert('Time is up!');
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerToggle.textContent = 'Start';
+  updateTimerFromInput();
+}
+
+// Audio processing
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(stream => {
     const context = new AudioContext();

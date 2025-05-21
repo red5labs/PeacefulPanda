@@ -16,10 +16,40 @@
     </div>
   </div>
 
-  <label>
-    Sensitivity:
-    <input type="range" min="1" max="10" value="5" id="sensitivity" />
-  </label>
+  <div class="controls-container">
+    <div class="control">
+      <label>
+        Sensitivity:
+        <input type="range" min="1" max="10" value="5" id="sensitivity" />
+      </label>
+    </div>
+
+    <div class="control">
+      <label>
+        Class Timer (minutes):
+        <input type="number" min="1" max="60" value="10" id="timer-input" />
+      </label>
+      <div class="timer-display" id="timer-display">10:00</div>
+      <button id="timer-toggle">Start</button>
+      <button id="timer-reset">Reset</button>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div class="card">
+      <h3>Adjusting Sensitivity</h3>
+      <p>Change the noise thresholds to match what works best for your classroom activities.</p>
+    </div>
+    <div class="card">
+      <h3>Using the Timer</h3>
+      <p>Set a timer for quiet reading time, group activities, or transitions between subjects.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Made with ❤️ for amazing teachers and their students.</p>
+    <p>Remember: A quiet classroom is a learning classroom!</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
