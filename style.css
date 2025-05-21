@@ -28,14 +28,26 @@ body::before {
   opacity: 0.8;
 }
 
-/* Fix for iOS devices where background-attachment: fixed doesn't work properly */
+/* Complete fix for iOS devices where background-attachment: fixed doesn't work */
 @supports (-webkit-touch-callout: none) {
-  body::before {
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  body {
+    background-image: url('images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
     background-attachment: scroll;
-    position: absolute;
-    height: 100vh;
-    min-height: 100%;
-    background-size: 100% 100vh;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  body::before {
+    display: none;
   }
 }
 
@@ -221,6 +233,13 @@ footer {
   padding-left: 20px;
   padding-right: 20px;
   backdrop-filter: blur(5px);
+  position: relative;
+}
+
+@supports (-webkit-touch-callout: none) {
+  footer {
+    width: calc(100% + 40px); /* Compensate for body padding */
+  }
 }
 
 footer p {
@@ -252,6 +271,12 @@ footer p {
   .cards-container {
     flex-direction: column;
     align-items: center;
+  }
+  
+  @supports (-webkit-touch-callout: none) {
+    body {
+      background-size: auto 100%;
+    }
   }
 }
 
@@ -292,5 +317,11 @@ footer p {
   button {
     padding: 6px 12px;
     font-size: 0.9rem;
+  }
+  
+  @supports (-webkit-touch-callout: none) {
+    footer {
+      width: calc(100% + 30px); /* Adjusted for smaller padding on mobile */
+    }
   }
 }
