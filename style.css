@@ -20,10 +20,10 @@ h1 {
 /* Bar container is now behind the image */
 #monster-bar-container {
   position: absolute;
-  bottom: 55px;               /* Adjust to belly */
+  bottom: 35px;               /* Adjust to belly */
   left: 50%;
   transform: translateX(-50%);
-  width: 175px;
+  width: 195px;
   height: 125px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 30px;
