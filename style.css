@@ -36,37 +36,21 @@ body::before {
   opacity: 0.8;
 }
 
-/* Complete fix for iOS devices where background-attachment: fixed doesn't work */
+/* iOS background fix */
 @supports (-webkit-touch-callout: none) {
-  html {
-    height: 100%;
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
-  
   body {
-    background-image: url('images/background.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-attachment: scroll;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    background-color: #1976D2; /* Fallback color */
   }
   
   body::before {
-    display: none;
+    /* Use a different approach for iOS */
+    background-attachment: scroll;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
   }
 }
 
@@ -260,11 +244,25 @@ footer {
   backdrop-filter: blur(5px);
   position: relative;
   box-sizing: content-box;
+  z-index: 10; /* Ensure footer is visible */
 }
 
 @supports (-webkit-touch-callout: none) {
   footer {
-    width: calc(100% + 40px); /* Compensate for body padding */
+    position: relative;
+    width: calc(100% + 40px);
+    left: -20px;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
+  }
+  
+  @media screen and (max-width: 480px) {
+    footer {
+      width: calc(100% + 30px);
+      left: -15px;
+    }
   }
 }
 
@@ -345,6 +343,13 @@ footer p {
     font-size: 0.9rem;
   }
   
+  footer {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  
   @supports (-webkit-touch-callout: none) {
     footer {
       width: calc(100% + 30px); /* Adjusted for smaller padding on mobile */
@@ -368,5 +373,20 @@ footer p {
     max-width: 100vw;
     margin: 0;
     padding: 0;
+    min-height: calc(100vh - 100px); /* Account for footer height */
+  }
+  
+  footer {
+    position: relative;
+    width: calc(100% + 40px);
+    left: -20px;
+    box-sizing: border-box;
+  }
+  
+  @media screen and (max-width: 480px) {
+    footer {
+      width: calc(100% + 30px);
+      left: -15px;
+    }
   }
 }
