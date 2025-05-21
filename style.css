@@ -15,7 +15,7 @@ body {
 body::before {
   content: "";
   background-image: url('images/background.png');
-  background-size: 100% auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
   background-attachment: fixed;
@@ -26,6 +26,17 @@ body::before {
   height: 100%;
   z-index: -1;
   opacity: 0.8;
+}
+
+/* Fix for iOS devices where background-attachment: fixed doesn't work properly */
+@supports (-webkit-touch-callout: none) {
+  body::before {
+    background-attachment: scroll;
+    position: absolute;
+    height: 100vh;
+    min-height: 100%;
+    background-size: 100% 100vh;
+  }
 }
 
 h1 {
@@ -214,4 +225,72 @@ footer {
 
 footer p {
   margin: 5px 0;
+}
+
+/* Media queries for different screen sizes */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .monster-img {
+    width: 250px;
+  }
+  
+  .monster-container::before {
+    width: 180px;
+    height: 140px;
+    bottom: 45px;
+  }
+  
+  #monster-bar-container {
+    width: 165px;
+    height: 130px;
+    bottom: 45px;
+  }
+  
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .monster-img {
+    width: 200px;
+  }
+  
+  .monster-container::before {
+    width: 150px;
+    height: 120px;
+    bottom: 38px;
+  }
+  
+  #monster-bar-container {
+    width: 135px;
+    height: 110px;
+    bottom: 38px;
+  }
+  
+  .control {
+    padding: 10px 15px;
+  }
+  
+  .timer-display {
+    font-size: 1.8rem;
+  }
+  
+  button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }
